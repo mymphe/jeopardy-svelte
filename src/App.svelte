@@ -1,5 +1,6 @@
 <script lang="ts">
   import GameData from "./lib/GameData.svelte";
+  import Teams from "./lib/Teams.svelte";
   import { gameStageStore, GameStage } from "./store/game-stage";
 
   let gameStage: GameStage;
@@ -19,7 +20,7 @@
   {#if gameStage === GameStage.FILE}
     <GameData />
   {:else if gameStage === GameStage.TEAMS}
-    <div>Create teams</div>
+    <Teams />
   {:else if gameStage === GameStage.BOARD}
     <div>Board</div>
   {:else if gameStage === GameStage.WINNER}
