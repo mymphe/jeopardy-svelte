@@ -1,4 +1,5 @@
 <script lang="ts">
+  import GameData from "./lib/GameData.svelte";
   import { gameStageStore, GameStage } from "./store/game-stage";
 
   let gameStage: GameStage;
@@ -16,7 +17,7 @@
   <button on:click={() => gameStageStore.set(GameStage.WINNER)}>WINNER</button>
 
   {#if gameStage === GameStage.FILE}
-    <div>Upload file</div>
+    <GameData />
   {:else if gameStage === GameStage.TEAMS}
     <div>Create teams</div>
   {:else if gameStage === GameStage.BOARD}

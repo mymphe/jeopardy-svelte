@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-export function localStorable<T>(key: string, defaultValue: T) {
+export function localStorable<T>(key: string, defaultValue?: T) {
   const value = fromLocalStorage<T>(key) || defaultValue;
   const store = writable<T>(value);
 
