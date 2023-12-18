@@ -1,12 +1,14 @@
-import type { Writable } from "svelte/store";
+import { get } from "svelte/store";
 import { persistable } from "./persistable";
+import { teams } from "./teams";
 
-interface Clue {
+export interface Clue {
   clue: string;
   price: number;
   hidden: boolean;
   wrong: string[];
   correct: string | null;
+  path: [number, number, number];
 }
 
 interface Category {
@@ -23,9 +25,13 @@ function createGameStore() {
   function transform(json: string): Game {
     const data: any = JSON.parse(json);
 
-    for (const round of data) {
-      for (const category of round) {
+    for (const [i, round] of data.entries()) {
+      for (const [j, category] of round.entries()) {
+        category.name = category.category;
+        delete category.category;
+
         const clues = [];
+        let k = 0;
 
         for (const [price, clue] of Object.entries(category.clues)) {
           clues.push({
@@ -34,7 +40,10 @@ function createGameStore() {
             hidden: false,
             wrong: [],
             correct: null,
+            path: [i, j, k],
           });
+
+          k += 1;
         }
 
         category.clues = clues;
@@ -47,6 +56,30 @@ function createGameStore() {
   return {
     ...gameStore,
     transform,
+    answer: (
+      teamName: string,
+      correct: boolean,
+      cluePath: [number, number, number]
+    ) => {
+      gameStore.update((game) => {
+        const [i, j, k] = cluePath;
+
+        const clue = game[i][j].clues[k];
+        const delta = correct ? clue.price : clue.price * -1;
+
+        teams.updateScore(teamName, delta);
+
+        if (correct && clue.correct !== teamName) {
+          clue.correct = teamName;
+          clue.hidden = true;
+        } else {
+          clue.wrong = [...clue.wrong, teamName];
+          clue.hidden = clue.wrong.length === get(teams).length;
+        }
+
+        return game;
+      });
+    },
   };
 }
 

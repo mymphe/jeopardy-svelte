@@ -8,14 +8,9 @@ interface Team {
 
 type Teams = Team[];
 
-interface TeamManager extends Writable<Teams> {
-  add: (name: string) => void;
-  remove: (name: string) => void;
-}
-
 const teamStore = persistable<Teams>("teams", []);
 
-export const teams: TeamManager = {
+export const teams = {
   ...teamStore,
   add: (name: string) =>
     teamStore.update((prevTeams) => [
@@ -27,4 +22,12 @@ export const teams: TeamManager = {
     ]),
   remove: (name: string) =>
     teamStore.update((prevTeams) => prevTeams.filter((t) => t.name !== name)),
+  updateScore: (teamName: string, delta: number) => {
+    teamStore.update((teams) => {
+      const team = teams.find((t) => t.name === teamName);
+      team!.score += delta;
+
+      return teams;
+    });
+  },
 };
