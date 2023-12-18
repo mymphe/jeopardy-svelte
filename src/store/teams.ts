@@ -13,7 +13,7 @@ interface TeamManager extends Writable<Teams> {
   remove: (name: string) => void;
 }
 
-const teamStore = persistable<Teams>("TEAMS", []);
+const teamStore = persistable<Teams>("teams", []);
 
 export const teams: TeamManager = {
   ...teamStore,

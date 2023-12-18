@@ -8,8 +8,6 @@ export enum Stage {
   WINNER,
 }
 
-const STAGE_KEY = "stage";
-
 interface StageManager extends Writable<Stage> {
   file: () => void;
   teams: () => void;
@@ -17,7 +15,7 @@ interface StageManager extends Writable<Stage> {
   winner: () => void;
 }
 
-const stageStore = persistable<Stage>(STAGE_KEY, Stage.FILE);
+const stageStore = persistable<Stage>("stage", Stage.FILE);
 
 export const stage: StageManager = {
   ...stageStore,
