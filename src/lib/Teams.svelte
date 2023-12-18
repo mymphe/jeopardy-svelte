@@ -1,55 +1,33 @@
 <script lang="ts">
-  import { get } from "svelte/store";
-  import { teamStore, type Team } from "../store/teams";
   import { stage } from "../store/stage";
+  import { teams } from "../store/teams";
 
   let newTeamName = "";
-  let teams: Team[] = get(teamStore);
 
-  teamStore.subscribe((_teams) => {
-    teams = _teams;
-  });
+  let addDisabled = true;
 
-  function addTeam() {
-    teamStore.update((teams) => {
-      teams.push({
-        name: newTeamName,
-        score: 0,
-        finalRound: {
-          guess: "",
-          stake: 0,
-        },
-      });
-      return teams;
-    });
-
-    newTeamName = "";
-  }
-
-  function removeTeam(teamName: string) {
-    teamStore.update((teams) => {
-      const filtered = teams.filter((t) => t.name !== teamName);
-      return filtered;
-    });
-  }
-
-  function submit() {
-    stage.board();
+  $: {
+    addDisabled = !newTeamName || !!$teams.find((t) => t.name === newTeamName);
   }
 </script>
 
-<form on:submit|preventDefault={submit}>
+<form on:submit|preventDefault={stage.board}>
   <input bind:value={newTeamName} />
-  {#if newTeamName && !teams.map((t) => t.name).includes(newTeamName)}
-    <button type="button" on:click={() => addTeam()}>+</button>
-  {/if}
-  {#each teams as team}
+  <button
+    disabled={addDisabled}
+    type="button"
+    on:click={() => {
+      teams.add(newTeamName);
+      newTeamName = "";
+    }}>+</button
+  >
+  {#each $teams as { name }}
     <div>
-      <span>{team.name}</span>
-      <button type="button" on:click={() => removeTeam(team.name)}>-</button>
+      <span>{name}</span>
+      <button type="button" on:click={() => teams.remove(name)}>-</button>
     </div>
+  {:else}
+    <p>No teams</p>
   {/each}
-  {#if teams.length}
-    <button type="submit">Далее</button>
-  {/if}
+  <button disabled={$teams.length === 0} type="submit">Далее</button>
 </form>
