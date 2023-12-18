@@ -1,4 +1,4 @@
-import { localStorable } from "./localStorable";
+import { persistable } from "./localStorable";
 
 export interface Clue {
   clue: string;
@@ -19,4 +19,4 @@ export type GameCategory = Record<CluePrice, Clue>;
 export type GameRound = Array<GameCategory>;
 export type GameData = Array<GameRound>;
 
-export const gameDataStore = localStorable<GameData>("GAME_DATA", []);
+export const gameDataStore = persistable<GameData>("GAME_DATA", []);

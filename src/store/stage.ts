@@ -1,5 +1,5 @@
 import { get, type Writable } from "svelte/store";
-import { localStorable } from "./localStorable";
+import { persistable } from "./localStorable";
 
 export enum Stage {
   FILE,
@@ -17,7 +17,7 @@ interface StageManager extends Writable<Stage> {
   winner: () => void;
 }
 
-const stageStore = localStorable<Stage>(STAGE_KEY, Stage.FILE);
+const stageStore = persistable<Stage>(STAGE_KEY, Stage.FILE);
 
 export const stage: StageManager = {
   ...stageStore,

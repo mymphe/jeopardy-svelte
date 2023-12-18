@@ -1,4 +1,4 @@
-import { localStorable } from "./localStorable";
+import { persistable } from "./localStorable";
 
 export interface Team {
   name: string;
@@ -9,4 +9,4 @@ export interface Team {
   };
 }
 
-export const teamStore = localStorable<Team[]>("TEAMS", []);
+export const teamStore = persistable<Team[]>("TEAMS", []);
