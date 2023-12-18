@@ -1,5 +1,5 @@
 import type { Writable } from "svelte/store";
-import { persistable } from "./localStorable";
+import { persistable } from "./persistable";
 
 interface Clue {
   clue: string;

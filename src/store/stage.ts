@@ -1,5 +1,5 @@
 import { get, type Writable } from "svelte/store";
-import { persistable } from "./localStorable";
+import { persistable } from "./persistable";
 
 export enum Stage {
   FILE,
