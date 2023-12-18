@@ -17,8 +17,6 @@ interface Category {
 type Round = Category[];
 type Game = Round[];
 
-interface GameManager extends Writable<Game> {}
-
 function createGameStore() {
   const gameStore = persistable<Game>("data", []);
 
