@@ -14,7 +14,11 @@ export function localStorable<T>(key: string, defaultValue?: T) {
 function fromLocalStorage<T>(key: string): T | null {
   const value = window.localStorage.getItem(key);
   if (value) {
-    return JSON.parse(value);
+    try {
+      return JSON.parse(value);
+    } catch {
+      return null;
+    }
   }
 
   return null;

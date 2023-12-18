@@ -1,7 +1,7 @@
 <script lang="ts">
   import { get } from "svelte/store";
   import { teamStore, type Team } from "../store/teams";
-  import { GameStage, gameStageStore } from "../store/game-stage";
+  import { stage } from "../store/stage";
 
   let newTeamName = "";
   let teams: Team[] = get(teamStore);
@@ -34,7 +34,7 @@
   }
 
   function submit() {
-    gameStageStore.set(GameStage.BOARD);
+    stage.board();
   }
 </script>
 

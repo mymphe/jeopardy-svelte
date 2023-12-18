@@ -19,4 +19,4 @@ export type GameCategory = Record<CluePrice, Clue>;
 export type GameRound = Array<GameCategory>;
 export type GameData = Array<GameRound>;
 
-export const gameDataStore = localStorable<GameData>("GAME_DATA", undefined);
+export const gameDataStore = localStorable<GameData>("GAME_DATA", []);

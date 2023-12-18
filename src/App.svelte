@@ -1,29 +1,23 @@
 <script lang="ts">
   import GameData from "./lib/GameData.svelte";
   import Teams from "./lib/Teams.svelte";
-  import { gameStageStore, GameStage } from "./store/game-stage";
-
-  let gameStage: GameStage;
-
-  gameStageStore.subscribe((_gameStage) => {
-    gameStage = _gameStage;
-  });
+  import { Stage, stage } from "./store/stage";
 </script>
 
 <main>
   <h1>Jeopardy</h1>
-  <button on:click={() => gameStageStore.set(GameStage.FILE)}>FILE</button>
-  <button on:click={() => gameStageStore.set(GameStage.TEAMS)}>TEAMS</button>
-  <button on:click={() => gameStageStore.set(GameStage.BOARD)}>BOARD</button>
-  <button on:click={() => gameStageStore.set(GameStage.WINNER)}>WINNER</button>
+  <button on:click={stage.file}>FILE</button>
+  <button on:click={stage.teams}>TEAMS</button>
+  <button on:click={stage.board}>BOARD</button>
+  <button on:click={stage.winner}>WINNER</button>
 
-  {#if gameStage === GameStage.FILE}
+  {#if $stage === Stage.FILE}
     <GameData />
-  {:else if gameStage === GameStage.TEAMS}
+  {:else if $stage === Stage.TEAMS}
     <Teams />
-  {:else if gameStage === GameStage.BOARD}
+  {:else if $stage === Stage.BOARD}
     <div>Board</div>
-  {:else if gameStage === GameStage.WINNER}
+  {:else if $stage === Stage.WINNER}
     <div>Winner</div>
   {:else}
     <h1>Unreachable</h1>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { gameDataStore, type GameData } from "../store/game-data";
-  import { GameStage, gameStageStore } from "../store/game-stage";
+  import { stage } from "../store/stage";
 
   let jsonContent: string = "";
 
@@ -36,7 +36,7 @@
     const gameData: GameData = transfrom(jsonContent);
     gameDataStore.set(gameData);
 
-    gameStageStore.set(GameStage.TEAMS);
+    stage.teams();
   }
 </script>
 
