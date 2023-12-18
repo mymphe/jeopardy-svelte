@@ -1,5 +1,5 @@
 <script lang="ts">
-  import GameData from "./lib/GameData.svelte";
+  import File from "./lib/File.svelte";
   import Teams from "./lib/Teams.svelte";
   import { Stage, stage } from "./store/stage";
 </script>
@@ -12,7 +12,7 @@
   <button on:click={stage.winner}>WINNER</button>
 
   {#if $stage === Stage.FILE}
-    <GameData />
+    <File />
   {:else if $stage === Stage.TEAMS}
     <Teams />
   {:else if $stage === Stage.BOARD}
