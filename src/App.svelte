@@ -14,10 +14,10 @@
       <p>{name}: {score}</p>
     {/each}
   </div>
-  <button on:click={stage.file}>FILE</button>
+  <!-- <button on:click={stage.file}>FILE</button>
   <button on:click={stage.teams}>TEAMS</button>
   <button on:click={stage.board}>BOARD</button>
-  <button on:click={stage.winner}>WINNER</button>
+  <button on:click={stage.winner}>WINNER</button> -->
 
   {#if $stage === Stage.FILE}
     <File />
