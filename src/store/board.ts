@@ -14,6 +14,8 @@ export const categories = derived([game, round], ([_game, _round]) =>
 );
 
 export const active = derived([game, cursor], ([_game, _cursor]) => {
+  if (!_game.length) return null;
+
   if (_cursor) {
     const [i, j, k] = _cursor;
 
