@@ -1,6 +1,7 @@
 <script lang="ts">
   import { active, categories, cursor, round } from "../store/board";
   import { game } from "../store/game";
+  import { stage } from "../store/stage";
   import { teams } from "../store/teams";
 
   const rounds = $game.length;
@@ -31,6 +32,11 @@
       on:click={() => round.update((r) => ++r)}>👉</button
     >
   </div>
+  {#if $round + 1 >= rounds}
+    <div>
+      <button type="button" on:click={() => stage.winner()}>Победитель</button>
+    </div>
+  {/if}
   {#if $active}
     <div class="clue">
       <h2>{$active.price}</h2>
