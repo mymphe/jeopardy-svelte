@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-export function persistable<T>(key: string, defaultValue?: T) {
+export function persistable<T>(key: string, defaultValue: T) {
   const value = fromLocalStorage<T>(key) || defaultValue;
   const store = writable<T>(value);
 
@@ -8,7 +8,12 @@ export function persistable<T>(key: string, defaultValue?: T) {
     window.localStorage.setItem(key, JSON.stringify(newValue));
   });
 
-  return store;
+  return {
+    ...store,
+    reset: () => {
+      store.set(defaultValue);
+    },
+  };
 }
 
 function fromLocalStorage<T>(key: string): T | null {

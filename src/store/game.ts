@@ -56,6 +56,16 @@ function createGameStore() {
   return {
     ...gameStore,
     transform,
+    hideClue: (cluePath: [number, number, number]) => {
+      gameStore.update((game) => {
+        const [i, j, k] = cluePath;
+
+        const clue = game[i][j].clues[k];
+        clue.hidden = true;
+
+        return game;
+      });
+    },
     answer: (
       teamName: string,
       correct: boolean,
@@ -71,10 +81,8 @@ function createGameStore() {
 
         if (correct && clue.correct !== teamName) {
           clue.correct = teamName;
-          clue.hidden = true;
         } else {
           clue.wrong = [...clue.wrong, teamName];
-          clue.hidden = clue.wrong.length === get(teams).length;
         }
 
         return game;

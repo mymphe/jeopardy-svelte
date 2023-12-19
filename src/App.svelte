@@ -2,6 +2,7 @@
   import Board from "./lib/Board.svelte";
   import File from "./lib/File.svelte";
   import Teams from "./lib/Teams.svelte";
+  import Winner from "./lib/Winner.svelte";
   import { Stage, stage } from "./store/stage";
   import { teams } from "./store/teams";
 </script>
@@ -25,7 +26,7 @@
   {:else if $stage === Stage.BOARD}
     <Board />
   {:else if $stage === Stage.WINNER}
-    <div>Winner</div>
+    <Winner />
   {:else}
     <h1>Unreachable</h1>
   {/if}

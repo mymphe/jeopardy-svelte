@@ -1,25 +1,9 @@
 <script lang="ts">
-  import { derived } from "svelte/store";
+  import { active, categories, cursor, round } from "../store/board";
   import { game } from "../store/game";
-  import { persistable } from "../store/persistable";
   import { teams } from "../store/teams";
 
-  const round = persistable("round", 0);
-  const categories = derived([game, round], ([_game, _round]) => _game[_round]);
-
   const rounds = $game.length;
-
-  const cursor = persistable<[number, number, number] | null>("cursor", null);
-
-  const active = derived([game, cursor], ([_game, _cursor]) => {
-    if (_cursor) {
-      const [i, j, k] = _cursor;
-
-      return _game[i][j].clues[k];
-    }
-
-    return null;
-  });
 </script>
 
 <div>
@@ -30,6 +14,8 @@
         >{price}</button
       >
     {/each}
+  {:else}
+    <p>No data</p>
   {/each}
   <hr />
   <div>
@@ -40,7 +26,7 @@
     >
     <span>{$round + 1} / {rounds}</span>
     <button
-      disabled={$round === rounds - 1}
+      disabled={$round + 1 >= rounds}
       type="button"
       on:click={() => round.update((r) => ++r)}>👉</button
     >
@@ -76,7 +62,15 @@
         {/each}
       </div>
       <hr />
-      <button on:click={() => cursor.set(null)} type="button">Закрыть</button>
+      <button
+        on:click={() => {
+          if ($cursor) {
+            game.hideClue($cursor);
+            cursor.set(null);
+          }
+        }}
+        type="button">Закрыть</button
+      >
     </div>
   {/if}
 </div>
