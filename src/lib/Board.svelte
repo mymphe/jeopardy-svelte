@@ -32,7 +32,7 @@
     >
   </div>
   {#if $active}
-    <div>
+    <div class="clue">
       <h2>{$active.price}</h2>
       <p>{$active.clue}</p>
       <hr />
@@ -74,3 +74,11 @@
     </div>
   {/if}
 </div>
+
+<style>
+  .clue {
+    margin: 5rem;
+    padding: 2rem;
+    border: 1px solid black;
+  }
+</style>
