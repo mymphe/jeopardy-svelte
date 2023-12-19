@@ -5,6 +5,26 @@
   import { teams } from "../store/teams";
 
   const rounds = $game.length;
+
+  enum ClueType {
+    text,
+    image,
+    audio,
+  }
+
+  let clueType = ClueType.text;
+
+  active.subscribe((clue) => {
+    if (clue) {
+      if (clue.clue.startsWith("audio")) {
+        clueType = ClueType.audio;
+      } else if (clue.clue.startsWith("image")) {
+        clueType = ClueType.image;
+      } else {
+        clueType = ClueType.text;
+      }
+    }
+  });
 </script>
 
 <div>
@@ -40,7 +60,17 @@
   {#if $active}
     <div class="clue">
       <h2>{$active.price}</h2>
-      <p>{$active.clue}</p>
+      {#if clueType === ClueType.image}
+        <img src={$active.clue.slice(6)} alt="clue" width="500" />
+      {:else if clueType === ClueType.audio}
+        <audio controls>
+          <source src={$active.clue.slice(6)} type="audio/ogg" />
+          <source src={$active.clue.slice(6)} type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      {:else}
+        <p>{$active.clue}</p>
+      {/if}
       <hr />
       <div>
         {#each $teams as { name }}
