@@ -10,6 +10,7 @@
     text,
     image,
     audio,
+    video,
   }
 
   let clueType = ClueType.text;
@@ -20,6 +21,8 @@
         clueType = ClueType.audio;
       } else if (clue.clue.startsWith("image")) {
         clueType = ClueType.image;
+      } else if (clue.clue.startsWith("video")) {
+        clueType = ClueType.video;
       } else {
         clueType = ClueType.text;
       }
@@ -69,6 +72,16 @@
           <source src={$active.clue.slice(6)} type="audio/mpeg" />
           Your browser does not support the audio element.
         </audio>
+      {:else if clueType === ClueType.video}
+        <iframe
+          width="560"
+          height="315"
+          src={$active.clue.slice(6).replace("watch?v=", "embed/")}
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
       {:else}
         <p>{$active.clue}</p>
       {/if}
