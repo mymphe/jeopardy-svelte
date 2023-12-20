@@ -52,6 +52,7 @@
       on:click={() => round.update((r) => ++r)}>👉</button
     >
   </div>
+  <button type="button" on:click={stage.teams}>Назад</button>
   {#if $round + 1 >= rounds}
     <div>
       <button type="button" on:click={() => stage.winner()}>Победитель</button>
