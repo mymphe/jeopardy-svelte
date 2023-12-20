@@ -29,5 +29,6 @@
   {:else}
     <p>No teams</p>
   {/each}
+  <button type="button" on:click={stage.file}>Назад</button>
   <button disabled={$teams.length === 0} type="submit">Далее</button>
 </form>
