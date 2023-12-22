@@ -8,16 +8,14 @@
 </script>
 
 <main>
-  <h1>Jeopardy</h1>
+  <header>
+    <h1 id="title">🔔 Гэнгизхан 🔔</h1>
+  </header>
   <div>
     {#each $teams as { name, score }}
       <p>{name}: {score}</p>
     {/each}
   </div>
-  <!-- <button on:click={stage.file}>FILE</button>
-  <button on:click={stage.teams}>TEAMS</button>
-  <button on:click={stage.board}>BOARD</button>
-  <button on:click={stage.winner}>WINNER</button> -->
 
   {#if $stage === Stage.FILE}
     <File />
@@ -33,4 +31,20 @@
 </main>
 
 <style>
+  main {
+    width: 100vw;
+    height: 100vh;
+
+    background: radial-gradient(#056724, #023516);
+    color: #f5f1ed;
+
+    text-align: center;
+    padding: 3rem;
+  }
+
+  #title {
+    font-family: "Ruslan Display";
+    font-size: 5rem;
+    color: rgb(255, 255, 255);
+  }
 </style>
