@@ -21,7 +21,7 @@
 
 <main>
   <header>
-    <h1 id="title">Гэнгизхан</h1>
+    <h1>Викторина Гэнговна</h1>
     <div>
       {#each $teams as { name, score }}
         <div>
@@ -59,26 +59,54 @@
 <style>
   main {
     width: 100vw;
+    min-width: 375px;
     height: 100vh;
 
     text-align: center;
+    padding: 0 10rem;
+
+    background-image: url("bg.jpg");
+    background-size: 100vw 100vh;
+    color: rgb(21, 21, 21);
+    font-family: Comfortaa, Arial, Helvetica, sans-serif;
+  }
+
+  @media (max-width: 720px) {
+    main {
+      padding: 0 2rem;
+    }
   }
 
   header {
-    padding: 1rem;
-    width: 100%;
+    height: 10vh;
+  }
+
+  header h1 {
+    font-family: Gabriela, serif;
+    font-size: 3em;
   }
 
   section {
-    padding: 1rem;
-    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.2px);
+    -webkit-backdrop-filter: blur(9.2px);
+
+    display: inline-block;
+    padding: 2rem;
+    text-align: center;
+    overflow: hidden;
   }
 
   footer {
-    position: fixed;
-    bottom: 0;
-    padding: 1rem;
+    height: 2vh;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
-    width: 100%;
   }
 </style>
