@@ -24,7 +24,16 @@
     <h1 id="title">Гэнгизхан</h1>
     <div>
       {#each $teams as { name, score }}
-        <p>{name}: {score}</p>
+        <div>
+          <p>
+            {#if $stage === Stage.TEAMS}
+              <button type="button" on:click={() => teams.remove(name)}
+                >-</button
+              >
+            {/if}
+            {name}: {score}
+          </p>
+        </div>
       {/each}
     </div>
   </header>

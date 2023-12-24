@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { nav } from "../store/nav";
   import { stage } from "../store/stage";
   import { teams } from "../store/teams";
 
@@ -9,26 +10,16 @@
   $: {
     addDisabled = !newTeamName || !!$teams.find((t) => t.name === newTeamName);
   }
+
+  $: {
+    nav.setNext($teams.length > 0);
+  }
+
+  function handleAdd() {
+    teams.add(newTeamName);
+    newTeamName = "";
+  }
 </script>
 
-<form on:submit|preventDefault={stage.board}>
-  <input bind:value={newTeamName} />
-  <button
-    disabled={addDisabled}
-    type="button"
-    on:click={() => {
-      teams.add(newTeamName);
-      newTeamName = "";
-    }}>+</button
-  >
-  {#each $teams as { name }}
-    <div>
-      <span>{name}</span>
-      <button type="button" on:click={() => teams.remove(name)}>-</button>
-    </div>
-  {:else}
-    <p>No teams</p>
-  {/each}
-  <button type="button" on:click={stage.file}>Назад</button>
-  <button disabled={$teams.length === 0} type="submit">Далее</button>
-</form>
+<input bind:value={newTeamName} placeholder="Hазвание команды" />
+<button disabled={addDisabled} type="button" on:click={handleAdd}>+</button>
