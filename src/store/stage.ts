@@ -16,6 +16,10 @@ function createStageStore() {
     teams: () => stageStore.set(Stage.TEAMS),
     board: () => stageStore.set(Stage.BOARD),
     winner: () => stageStore.set(Stage.WINNER),
+    back: () =>
+      stageStore.update((stage) => (stage > Stage.FILE ? stage - 1 : stage)),
+    next: () =>
+      stageStore.update((stage) => (stage < Stage.WINNER ? stage + 1 : stage)),
   };
 }
 
