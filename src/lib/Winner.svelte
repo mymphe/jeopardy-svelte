@@ -32,7 +32,5 @@
   };
 </script>
 
-<div>
-  <p>Yahoo {$winner.name}</p>
-  <button type="button" on:click={resetGame}>Начать заново</button>
-</div>
+<h2>Yahoo {$winner.name}</h2>
+<button type="button" on:click={resetGame}>Начать заново</button>

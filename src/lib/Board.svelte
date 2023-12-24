@@ -1,10 +1,19 @@
 <script lang="ts">
   import { active, categories, cursor, round } from "../store/board";
   import { game } from "../store/game";
-  import { stage } from "../store/stage";
+  import { nav } from "../store/nav";
   import { teams } from "../store/teams";
 
   const rounds = $game.length;
+
+  $: {
+    const lastRound = $round + 1 === rounds;
+    if (lastRound) {
+      nav.setNext(true);
+    } else {
+      nav.setNext(false);
+    }
+  }
 
   enum ClueType {
     text,
@@ -55,12 +64,6 @@
       on:click={() => round.update((r) => ++r)}>👉</button
     >
   </div>
-  <button type="button" on:click={stage.teams}>Назад</button>
-  {#if $round + 1 >= rounds}
-    <div>
-      <button type="button" on:click={() => stage.winner()}>Победитель</button>
-    </div>
-  {/if}
   {#if $active}
     <div class="clue">
       <h2>{$active.price}</h2>
