@@ -15,9 +15,9 @@
 </script>
 
 <footer>
-  <button disabled={!$nav.back} on:click={stage.back}>&LessLess;</button>
+  <button disabled={!$nav.back} on:click={stage.back}>←</button>
   <span>&nbsp;</span>
-  <button disabled={!$nav.next} on:click={stage.next}>&GreaterGreater;</button>
+  <button disabled={!$nav.next} on:click={stage.next}>→</button>
 </footer>
 
 <style>
@@ -46,11 +46,11 @@
   }
 
   button:hover:enabled {
-    background-color: black;
-    color: white;
+    box-shadow: 4px 4px black;
   }
 
   button:active:enabled {
-    transform: translate(1%, 1%);
+    box-shadow: 2px 2px black;
+    transform: translate(2px, 2px);
   }
 </style>
