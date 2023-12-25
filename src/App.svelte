@@ -37,19 +37,17 @@
       {/each}
     </div>
   </header>
-  <section>
-    {#if $stage === Stage.FILE}
-      <File />
-    {:else if $stage === Stage.TEAMS}
-      <Teams />
-    {:else if $stage === Stage.BOARD}
-      <Board />
-    {:else if $stage === Stage.WINNER}
-      <Winner />
-    {:else}
-      <p>Unreachable</p>
-    {/if}
-  </section>
+  {#if $stage === Stage.FILE}
+    <File />
+  {:else if $stage === Stage.TEAMS}
+    <Teams />
+  {:else if $stage === Stage.BOARD}
+    <Board />
+  {:else if $stage === Stage.WINNER}
+    <Winner />
+  {:else}
+    <p>Unreachable</p>
+  {/if}
   <footer>
     <button disabled={!$nav.back} on:click={stage.back}>Назад</button>
     <button disabled={!$nav.next} on:click={stage.next}>Далее</button>
@@ -84,19 +82,6 @@
   header h1 {
     font-family: Gabriela, serif;
     font-size: 3em;
-  }
-
-  section {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(9.2px);
-    -webkit-backdrop-filter: blur(9.2px);
-
-    display: inline-block;
-    padding: 2rem;
-    text-align: center;
-    overflow: hidden;
   }
 
   footer {

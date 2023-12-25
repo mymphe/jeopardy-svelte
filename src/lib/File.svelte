@@ -2,6 +2,9 @@
   import type { FormEventHandler } from "svelte/elements";
   import { game } from "../store/game";
   import { nav } from "../store/nav";
+  import { fade } from "svelte/transition";
+  import Section from "./base/Glass.svelte";
+  import Glass from "./base/Glass.svelte";
 
   let error: boolean = true;
 
@@ -33,7 +36,9 @@
   }
 </script>
 
-<input type="file" on:change={handleChange} accept=".json" class:error />
+<Glass>
+  <input type="file" on:change={handleChange} accept=".json" class:error />
+</Glass>
 
 <style>
   input {

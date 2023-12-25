@@ -4,6 +4,7 @@
   import { stage } from "../store/stage";
   import { game } from "../store/game";
   import { cursor, round } from "../store/board";
+  import Glass from "./base/Glass.svelte";
 
   const winner = derived([teams], ([_teams]) => {
     if (!_teams.length)
@@ -32,5 +33,7 @@
   };
 </script>
 
-<h2>Yahoo {$winner.name}</h2>
-<button type="button" on:click={resetGame}>Начать заново</button>
+<Glass>
+  <h2>Yahoo {$winner.name}</h2>
+  <button type="button" on:click={resetGame}>Начать заново</button>
+</Glass>

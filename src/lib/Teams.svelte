@@ -1,7 +1,7 @@
 <script lang="ts">
   import { nav } from "../store/nav";
-  import { stage } from "../store/stage";
   import { teams } from "../store/teams";
+  import Glass from "./base/Glass.svelte";
 
   let newTeamName = "";
 
@@ -21,5 +21,7 @@
   }
 </script>
 
-<input bind:value={newTeamName} placeholder="Hазвание команды" />
-<button disabled={addDisabled} type="button" on:click={handleAdd}>+</button>
+<Glass>
+  <input bind:value={newTeamName} placeholder="Hазвание команды" />
+  <button disabled={addDisabled} type="button" on:click={handleAdd}>+</button>
+</Glass>
