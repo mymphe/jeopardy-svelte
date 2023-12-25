@@ -2,7 +2,7 @@
   import Board from "./lib/Board.svelte";
   import File from "./lib/File.svelte";
   import Footer from "./lib/Footer.svelte";
-  import Header from "./lib/Header.svelte";
+  import Score from "./lib/Score.svelte";
   import Teams from "./lib/Teams.svelte";
   import Winner from "./lib/Winner.svelte";
   import { nav } from "./store/nav";
@@ -11,7 +11,7 @@
 </script>
 
 <main>
-  <Header />
+  <Score />
   {#if $stage === Stage.FILE}
     <File />
   {:else if $stage === Stage.TEAMS}
@@ -32,7 +32,7 @@
     min-width: 375px;
     height: 100vh;
 
-    background: linear-gradient(0deg, #ffffaa, yellow);
+    background-color: yellow;
     background-size: 200%;
     background-position: 20% 150%;
     font-family: "Tektur", sans-serif;
