@@ -3,7 +3,164 @@
   import { teams } from "../store/teams";
   import Glass from "./base/Glass.svelte";
 
-  let newTeamName = "";
+  const animals = [
+    "🐒",
+    "🦍",
+    "🦧",
+    "🐩",
+    "🐺",
+    "🦊",
+    "🦝",
+    "🐈",
+    "🐈‍⬛",
+    "🦁",
+    "🐯",
+    "🐴",
+    "🫎",
+    "🫏",
+    "🦄",
+    "🦓",
+    "🦌",
+    "🐮",
+    "🐷",
+    "🐗",
+    "🐐",
+    "🐪",
+    "🦙",
+    "🦒",
+    "🐘",
+    "🦣",
+    "🦏",
+    "🦛",
+    "🐁",
+    "🐀",
+    "🐹",
+    "🐰",
+    "🐿️",
+    "🦫",
+    "🦔",
+    "🦇",
+    "🐻",
+    "🐨",
+    "🐼",
+    "🦥",
+    "🦦",
+    "🦨",
+    "🦘",
+    "🦡",
+    "🦃",
+    "🐔",
+    "🐓",
+    "🐥",
+    "🕊️",
+    "🦅",
+    "🦆",
+    "🦢",
+    "🦉",
+    "🦩",
+    "🦜",
+    "🦚",
+    "🐸",
+    "🐊",
+    "🐢",
+    "🦎",
+    "🐍",
+    "🐲",
+    "🦕",
+    "🦖",
+    "🐋",
+    "🐬",
+    "🦭",
+    "🐡",
+    "🦈",
+    "🐙",
+    "🪼",
+    "🦀",
+    "🦞",
+    "🦐",
+    "🦑",
+    "🐌",
+    "🦋",
+    "🐛",
+    "🐜",
+    "🐝",
+    "🐞",
+    "🦗",
+    "🪳",
+    "🕷️",
+    "🦂",
+    "🦟",
+    "🪰",
+    "🪱",
+  ];
+
+  const traits = [
+    "🔨",
+    "🪓",
+    "⛏️",
+    "🗡️",
+    "💣",
+    "🪃",
+    "🏹",
+    "🛡️",
+    "🪚",
+    "🔧",
+    "🪛",
+    "🔩",
+    "🎷",
+    "🪗",
+    "🎸",
+    "🎹",
+    "🎺",
+    "🎻",
+    "🪕",
+    "🥁",
+    "🪘",
+    "🪇",
+    "🪈",
+    "🕶️",
+    "🥽",
+    "🥼",
+    "🦺",
+    "👔",
+    "👕",
+    "👖",
+    "🧣",
+    "🧤",
+    "🧥",
+    "🧦",
+    "👗",
+    "👘",
+    "🩱",
+    "🩲",
+    "🩳",
+    "👙",
+    "👚",
+    "🪭",
+    "👛",
+    "👜",
+    "🎒",
+    "🩴",
+    "👟",
+    "🥾",
+    "🥿",
+    "👠",
+    "👡",
+    "🩰",
+    "👢",
+    "🪮",
+    "👑",
+    "👒",
+    "🎩",
+  ];
+
+  function random() {
+    const trait = traits[Math.floor(Math.random() * traits.length)];
+    const animal = animals[Math.floor(Math.random() * animals.length)];
+    return trait + animal;
+  }
+
+  let newTeamName = random();
 
   let addDisabled = true;
 
@@ -17,11 +174,71 @@
 
   function handleAdd() {
     teams.add(newTeamName);
-    newTeamName = "";
+    newTeamName = random();
   }
 </script>
 
-<Glass>
-  <input bind:value={newTeamName} placeholder="Hазвание команды" />
-  <button disabled={addDisabled} type="button" on:click={handleAdd}>+</button>
+<Glass title="Кто вы такие?">
+  <div>
+    <button
+      class="refresh"
+      type="button"
+      on:click={() => {
+        newTeamName = random();
+      }}>✦</button
+    >
+    <p>{newTeamName}</p>
+    <button
+      disabled={addDisabled}
+      type="button"
+      on:click={handleAdd}
+      class="add">✔</button
+    >
+  </div>
 </Glass>
+
+<style>
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  p {
+    font-size: 3rem;
+    width: 4ch;
+    margin: 1rem 2rem;
+  }
+
+  button {
+    appearance: none;
+    font-size: 1rem;
+    line-height: 1rem;
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+    padding: 0.2rem 0.5rem;
+    font-family: "Tektur", sans-serif;
+  }
+
+  button:disabled {
+    opacity: 0.3;
+  }
+
+  button:hover:enabled {
+    box-shadow: 4px 4px black;
+  }
+
+  button:active:enabled {
+    box-shadow: 2px 2px black;
+    transform: translate(2px, 2px);
+  }
+
+  .refresh {
+    color: rgb(143, 0, 226);
+  }
+
+  .add {
+    color: rgb(0, 175, 0);
+  }
+</style>
