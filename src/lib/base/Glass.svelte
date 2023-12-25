@@ -10,6 +10,7 @@
       opacity: 0.5,
       easing: quintOut,
     }}
+    class="glass standard-font"
   >
     <slot />
   </section>
@@ -22,15 +23,13 @@
     top: 30%;
     transform: translate(-50%, -50%);
 
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(9.2px);
-    -webkit-backdrop-filter: blur(9.2px);
-
     display: inline-block;
     padding: 2rem;
     text-align: center;
     overflow: hidden;
+
+    background-color: white;
+    border: 2px solid blue;
+    box-shadow: 10px 10px blue;
   }
 </style>

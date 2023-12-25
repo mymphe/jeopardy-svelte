@@ -1,6 +1,7 @@
 <script lang="ts">
   import Board from "./lib/Board.svelte";
   import File from "./lib/File.svelte";
+  import Header from "./lib/Header.svelte";
   import Teams from "./lib/Teams.svelte";
   import Winner from "./lib/Winner.svelte";
   import { nav } from "./store/nav";
@@ -20,23 +21,7 @@
 </script>
 
 <main>
-  <header>
-    <h1>Викторина Гэнговна</h1>
-    <div>
-      {#each $teams as { name, score }}
-        <div>
-          <p>
-            {#if $stage === Stage.TEAMS}
-              <button type="button" on:click={() => teams.remove(name)}
-                >-</button
-              >
-            {/if}
-            {name}: {score}
-          </p>
-        </div>
-      {/each}
-    </div>
-  </header>
+  <Header />
   {#if $stage === Stage.FILE}
     <File />
   {:else if $stage === Stage.TEAMS}
@@ -60,28 +45,16 @@
     min-width: 375px;
     height: 100vh;
 
-    text-align: center;
-    padding: 0 10rem;
-
-    background-image: url("bg.jpg");
-    background-size: 100vw 100vh;
-    color: rgb(21, 21, 21);
-    font-family: Comfortaa, Arial, Helvetica, sans-serif;
+    background: linear-gradient(0deg, #ffffaa, yellow);
+    background-size: 200%;
+    background-position: 20% 150%;
+    font-family: "Tektur", sans-serif;
   }
 
   @media (max-width: 720px) {
     main {
       padding: 0 2rem;
     }
-  }
-
-  header {
-    height: 10vh;
-  }
-
-  header h1 {
-    font-family: Gabriela, serif;
-    font-size: 3em;
   }
 
   footer {
