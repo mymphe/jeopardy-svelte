@@ -7,6 +7,20 @@
   let filename: string = "";
   let error: boolean = true;
 
+  let text: string = "🤷‍♀️";
+
+  $: {
+    if (filename) {
+      if (error) {
+        text = `🙅‍♀️ ${filename} 🙅‍♀️`;
+      } else {
+        text = `💁‍♀️ ${filename} 💁‍♀️`;
+      }
+    } else {
+      text = "🤷‍♀️";
+    }
+  }
+
   $: {
     nav.setNext(!error);
   }
@@ -14,6 +28,7 @@
   const handleChange: FormEventHandler<HTMLInputElement> = async (event) => {
     try {
       error = false;
+      filename = "";
 
       const target = event.target as HTMLInputElement;
       const [file] = target.files!;
@@ -37,40 +52,23 @@
 </script>
 
 <Glass title="загрузите файл">
-  <button id="disk">
-    <label for="json"> 💾</label>
+  <button>
+    <label for="json">💾</label>
   </button>
   <input id="json" type="file" on:change={handleChange} accept=".json" />
-  {#if filename}
-    <p class:error>
-      {#if error}
-        🧏‍♀️
-      {:else}
-        🎉
-      {/if}
-      {filename}
-      {#if error}
-        🧏‍♀️
-      {:else}
-        🎉
-      {/if}
-    </p>
-  {:else}
-    <p>.json</p>
-  {/if}
+  <p class:error>
+    {text}
+  </p>
 </Glass>
 
 <style>
-  #disk {
+  label {
+    cursor: pointer;
     font-size: 3rem;
   }
 
-  label {
-    cursor: pointer;
-  }
-
-  #disk:active {
-    transform: translate(1%, 1%);
+  button:active {
+    transform: translate(2px, 2px);
   }
 
   input {
