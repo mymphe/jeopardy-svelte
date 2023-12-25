@@ -4,6 +4,7 @@
   import { nav } from "../store/nav";
   import Glass from "./base/Glass.svelte";
 
+  let filename: string = "";
   let error: boolean = true;
 
   $: {
@@ -16,6 +17,7 @@
 
       const target = event.target as HTMLInputElement;
       const [file] = target.files!;
+      filename = file.name;
 
       const json = await parseJson(file);
       game.set(game.transform(json));
@@ -34,12 +36,45 @@
   }
 </script>
 
-<Glass>
-  <input type="file" on:change={handleChange} accept=".json" class:error />
+<Glass title="загрузите файл">
+  <button id="disk">
+    <label for="json"> 💾</label>
+  </button>
+  <input id="json" type="file" on:change={handleChange} accept=".json" />
+  {#if filename}
+    <p class:error>
+      {#if error}
+        🧏‍♀️
+      {:else}
+        🎉
+      {/if}
+      {filename}
+      {#if error}
+        🧏‍♀️
+      {:else}
+        🎉
+      {/if}
+    </p>
+  {:else}
+    <p>.json</p>
+  {/if}
 </Glass>
 
 <style>
+  #disk {
+    font-size: 3rem;
+  }
+
+  label {
+    cursor: pointer;
+  }
+
+  #disk:active {
+    transform: translate(1%, 1%);
+  }
+
   input {
+    display: none;
     font-family: "Tektur", sans-serif;
     appearance: none;
     font-size: 0.8rem;

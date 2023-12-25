@@ -1,6 +1,8 @@
-<script>
-  import { blur, fade, fly, scale, slide } from "svelte/transition";
+<script lang="ts">
+  import { scale } from "svelte/transition";
   import { quintOut } from "svelte/easing";
+
+  export let title: string = "";
 </script>
 
 <div>
@@ -12,11 +14,25 @@
     }}
     class="glass standard-font"
   >
-    <slot />
+    {#if title}
+      <p>{title}</p>
+    {/if}
+    <div id="content">
+      <slot />
+    </div>
   </section>
 </div>
 
 <style>
+  p {
+    border-bottom: 2px solid blue;
+    padding: 8px 24px;
+  }
+
+  #content {
+    padding: 8px 24px 16px;
+  }
+
   section {
     position: absolute;
     left: 50%;
@@ -24,7 +40,6 @@
     transform: translate(-50%, -50%);
 
     display: inline-block;
-    padding: 2rem;
     text-align: center;
     overflow: hidden;
 

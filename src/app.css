@@ -14,3 +14,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+button {
+  appearance: none;
+  background: none;
+  border: none;
+}
