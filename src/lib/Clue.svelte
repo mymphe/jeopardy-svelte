@@ -54,31 +54,7 @@
     <p>{clue.clue}</p>
   {/if}
   <hr />
-  <div>
-    {#each $teams as { name }}
-      <div>
-        <p>{name}</p>
-        <button
-          disabled={clue.wrong.includes(name) || !!clue.correct}
-          type="button"
-          on:click={() => {
-            if ($active) {
-              game.answer(name, true, $active.path);
-            }
-          }}>👍</button
-        >
-        <button
-          disabled={!!clue.correct || clue.wrong.includes(name)}
-          type="button"
-          on:click={() => {
-            if ($active) {
-              game.answer(name, false, $active.path);
-            }
-          }}>👎</button
-        >
-      </div>
-    {/each}
-  </div>
+
   <hr />
   <button
     on:click={() => {

@@ -2,6 +2,8 @@
   import { derived } from "svelte/store";
   import { Stage, stage } from "../store/stage";
   import { teams } from "../store/teams";
+  import { active } from "../store/board";
+  import { game } from "../store/game";
 
   const odd = derived([teams], ([teams]) =>
     teams.filter((_, i) => i % 2 === 0)
@@ -14,39 +16,83 @@
 
 <div class="score left">
   {#each $odd as { name, score }}
-    <div>
-      <p class="item">
-        <span class="name">
-          {name}
+    <div class="item">
+      <span class="name">
+        {name}
+      </span>
+      <span>&nbsp;</span>
+      {#if $stage === Stage.TEAMS}
+        <button type="button" on:click={() => teams.remove(name)}>✕</button>
+      {:else}
+        <span class="numbers">
+          {score}
         </span>
-        <span>&nbsp;</span>
-        {#if $stage === Stage.TEAMS}
-          <button type="button" on:click={() => teams.remove(name)}>✕</button>
-        {:else}
-          <span class="numbers">
-            {score}
-          </span>
-        {/if}
-      </p>
+      {/if}
+      {#if $active && !$active.correct && !$active?.wrong.includes(name)}
+        <div class="updown">
+          <button
+            class="answer-correct"
+            disabled={$active.wrong.includes(name) || !!$active.correct}
+            type="button"
+            on:click={() => {
+              if ($active) {
+                game.answer(name, true, $active.path);
+              }
+            }}>✓</button
+          >
+          <button
+            class="answer-wrong"
+            disabled={!!$active.correct || $active.wrong.includes(name)}
+            type="button"
+            on:click={() => {
+              if ($active) {
+                game.answer(name, false, $active.path);
+              }
+            }}>✕</button
+          >
+        </div>
+      {/if}
     </div>
   {/each}
 </div>
 <div class="score right">
   {#each $even as { name, score }}
-    <div>
-      <p class="item">
-        {#if $stage === Stage.TEAMS}
-          <button type="button" on:click={() => teams.remove(name)}>✕</button>
-        {:else}
-          <span class="numbers">
-            {score}
-          </span>
-        {/if}
-        <span>&nbsp;</span>
-        <span class="name">
-          {name}
+    <div class="item">
+      {#if $active && !$active.correct && !$active?.wrong.includes(name)}
+        <div class="updown">
+          <button
+            class="answer-correct"
+            disabled={$active.wrong.includes(name) || !!$active.correct}
+            type="button"
+            on:click={() => {
+              if ($active) {
+                game.answer(name, true, $active.path);
+              }
+            }}>↑</button
+          >
+          <button
+            class="answer-wrong"
+            disabled={!!$active.correct || $active.wrong.includes(name)}
+            type="button"
+            on:click={() => {
+              if ($active) {
+                game.answer(name, false, $active.path);
+              }
+            }}>↓</button
+          >
+        </div>
+      {/if}
+      {#if $stage === Stage.TEAMS}
+        <button type="button" on:click={() => teams.remove(name)}>✕</button>
+      {:else}
+        <span class="numbers">
+          {score}
         </span>
-      </p>
+      {/if}
+      <span>&nbsp;</span>
+      <span class="name">
+        {name}
+      </span>
     </div>
   {/each}
 </div>
@@ -84,6 +130,13 @@
     align-items: center;
   }
 
+  .updown {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
   button {
     appearance: none;
     font-size: 1rem;
@@ -100,5 +153,9 @@
 
   button:active:enabled {
     transform: translate(2px, 2px);
+  }
+
+  .answer-correct {
+    color: rgb(0, 180, 0) !important;
   }
 </style>
