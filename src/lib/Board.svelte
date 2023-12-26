@@ -3,18 +3,8 @@
   import { game } from "../store/game";
   import { nav } from "../store/nav";
   import { teams } from "../store/teams";
+  import BoardGlass from "./base/BoardGlass.svelte";
   import Glass from "./base/Glass.svelte";
-
-  const rounds = $game.length;
-
-  $: {
-    const lastRound = $round + 1 === rounds;
-    if (lastRound) {
-      nav.setNext(true);
-    } else {
-      nav.setNext(false);
-    }
-  }
 
   enum ClueType {
     text,
@@ -102,33 +92,47 @@
     >
   </Glass>
 {:else}
-  <Glass>
+  <BoardGlass>
     {#each $categories as { name, clues }}
       <p>{name}</p>
       {#each clues as { hidden, price, path }}
-        <button disabled={hidden} on:click={() => cursor.set(path)}
-          >{price}</button
+        <button
+          class="clue-button"
+          disabled={hidden}
+          on:click={() => cursor.set(path)}>{price}</button
         >
       {/each}
     {:else}
       <p>No data</p>
     {/each}
-    <hr />
-    <div>
-      <button
-        disabled={$round === 0}
-        type="button"
-        on:click={() => round.update((r) => --r)}>👈</button
-      >
-      <span>{$round + 1} / {rounds}</span>
-      <button
-        disabled={$round + 1 >= rounds}
-        type="button"
-        on:click={() => round.update((r) => ++r)}>👉</button
-      >
-    </div>
-  </Glass>
+  </BoardGlass>
 {/if}
 
 <style>
+  button {
+    appearance: none;
+    font-size: 20px;
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+    padding: 0.5rem 1rem;
+    font-family: "Tektur", sans-serif;
+  }
+
+  button:disabled {
+    opacity: 0.3;
+  }
+
+  button:hover:enabled {
+    box-shadow: 4px 4px black;
+  }
+
+  button:active:enabled {
+    box-shadow: 2px 2px black;
+    transform: translate(2px, 2px);
+  }
+
+  .clue-button {
+    margin-right: 6px;
+  }
 </style>

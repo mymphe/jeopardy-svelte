@@ -12,7 +12,6 @@
       opacity: 0.5,
       easing: quintOut,
     }}
-    class="glass standard-font"
   >
     {#if title}
       <p>{title}</p>
@@ -36,7 +35,7 @@
   section {
     position: absolute;
     left: 50%;
-    top: 30%;
+    top: 40%;
     transform: translate(-50%, -50%);
 
     display: inline-block;

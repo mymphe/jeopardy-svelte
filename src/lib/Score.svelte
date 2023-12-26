@@ -63,10 +63,12 @@
 
   .left {
     left: 1rem;
+    align-items: start;
   }
 
   .right {
-    right: 2rem;
+    right: 1rem;
+    align-items: end;
   }
 
   .name {
