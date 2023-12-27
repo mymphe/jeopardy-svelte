@@ -15,25 +15,23 @@
   }
 </script>
 
-<div class="board-glass">
-  <section>
-    <div class="heading">
-      <button
-        disabled={$round === 0}
-        type="button"
-        on:click={() => round.update((r) => --r)}>←</button
-      >
-      <span>Раунд {$round + 1} / {rounds}</span>
-      <button
-        disabled={$round + 1 >= rounds}
-        type="button"
-        on:click={() => round.update((r) => ++r)}>→</button
-      >
-    </div>
-    <div id="content">
-      <slot />
-    </div>
-  </section>
+<div class="board">
+  <div class="heading">
+    <button
+      disabled={$round === 0}
+      type="button"
+      on:click={() => round.update((r) => --r)}>←</button
+    >
+    <span>Раунд {$round + 1} / {rounds}</span>
+    <button
+      disabled={$round + 1 >= rounds}
+      type="button"
+      on:click={() => round.update((r) => ++r)}>→</button
+    >
+  </div>
+  <div class="content">
+    <slot />
+  </div>
 </div>
 
 <style>
@@ -45,20 +43,20 @@
     justify-content: space-between;
   }
 
-  #content {
-    padding: 8px 24px 16px;
+  .content {
+    padding: 1rem;
   }
 
-  section {
+  .board {
     position: absolute;
     left: 50%;
     top: 45%;
     transform: translate(-50%, -50%);
 
     width: 70vw;
-    display: inline-block;
+    max-height: 70vh;
     text-align: center;
-    overflow: hidden;
+    overflow-x: hidden;
 
     background-color: white;
     border: 2px solid blue;

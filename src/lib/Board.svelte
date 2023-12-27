@@ -9,14 +9,21 @@
 {:else}
   <BoardGlass>
     {#each $categories as { name, clues }}
-      <h3>{name}</h3>
-      {#each clues as { hidden, price, path }}
-        <button
-          class="clue-button"
-          disabled={hidden}
-          on:click={() => cursor.set(path)}>{price}</button
+      <div class="category">
+        <h3 class="category-name">{name}</h3>
+        <div
+          class="category-clues"
+          style="grid-template-columns: repeat({clues.length}, 1fr)"
         >
-      {/each}
+          {#each clues as { hidden, price, path }}
+            <button
+              class="clue-button"
+              disabled={hidden}
+              on:click={() => cursor.set(path)}>{price}</button
+            >
+          {/each}
+        </div>
+      </div>
     {:else}
       <p>No data</p>
     {/each}
@@ -24,8 +31,22 @@
 {/if}
 
 <style>
-  h3 {
-    margin-top: 0.5rem;
+  .category {
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+    column-gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .category-name {
+    text-align: left;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .category-clues {
+    display: grid;
   }
 
   button {
@@ -52,7 +73,7 @@
   }
 
   .clue-button {
-    margin-right: 6px;
+    margin-right: 0.5rem;
     font-size: 0.8rem;
   }
 </style>
