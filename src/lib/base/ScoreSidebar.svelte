@@ -110,6 +110,11 @@
     flex-direction: row-reverse;
   }
 
+  .remove {
+    color: red;
+    padding: 0 0.5rem;
+  }
+
   .team-name {
     padding: 0.2rem 0.4rem;
     font-size: 1.5rem;
