@@ -7,9 +7,6 @@
       nav.setBack(false);
     } else if ($stage === Stage.WINNER) {
       nav.setNext(false);
-    } else {
-      nav.setBack(true);
-      nav.setNext(true);
     }
   }
 </script>

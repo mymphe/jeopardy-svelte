@@ -171,6 +171,8 @@
       $teams.length === MAX_TEAMS;
   }
 
+  nav.setBack(true);
+
   $: {
     nav.setNext($teams.length > 0);
   }
