@@ -68,7 +68,7 @@
               if ($active) {
                 game.answer(name, true, $active.path);
               }
-            }}>↑</button
+            }}>✓</button
           >
           <button
             class="answer-wrong"
@@ -78,7 +78,7 @@
               if ($active) {
                 game.answer(name, false, $active.path);
               }
-            }}>↓</button
+            }}>✕</button
           >
         </div>
       {/if}
@@ -118,11 +118,11 @@
   }
 
   .name {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .numbers {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .item {

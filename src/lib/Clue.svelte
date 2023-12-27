@@ -30,10 +30,9 @@
   });
 </script>
 
-<Glass>
-  <h2>{clue.price}</h2>
+<Glass title={String(clue.price)} padding={clueType !== ClueType.image}>
   {#if clueType === ClueType.image}
-    <img src={clue.clue.slice(6)} alt="clue" width="500" />
+    <img src={clue.clue.slice(6)} alt="clue" />
   {:else if clueType === ClueType.audio}
     <audio controls>
       <source src={clue.clue.slice(6)} type="audio/ogg" />
@@ -53,16 +52,46 @@
   {:else}
     <p>{clue.clue}</p>
   {/if}
-  <hr />
-
-  <hr />
-  <button
-    on:click={() => {
-      if ($cursor) {
-        game.hideClue($cursor);
-        cursor.set(null);
-      }
-    }}
-    type="button">Закрыть</button
-  >
+  <div>
+    <button
+      on:click={() => {
+        if ($cursor) {
+          game.hideClue($cursor);
+          cursor.set(null);
+        }
+      }}
+      type="button">Закрыть</button
+    >
+  </div>
 </Glass>
+
+<style>
+  button {
+    appearance: none;
+    font-size: 0.6rem;
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+    padding: 0.2rem 2rem;
+    font-family: "Tektur", sans-serif;
+    margin-top: 1rem;
+  }
+
+  button:disabled {
+    opacity: 0.3;
+  }
+
+  button:hover:enabled {
+    box-shadow: 4px 4px black;
+  }
+
+  button:active:enabled {
+    box-shadow: 2px 2px black;
+    transform: translate(2px, 2px);
+  }
+
+  img {
+    max-width: 700px;
+    max-height: 400px;
+  }
+</style>

@@ -62,8 +62,8 @@
     left: 50%;
     top: 45%;
     transform: translate(-50%, -50%);
-    width: 50vw;
 
+    width: 70vw;
     display: inline-block;
     text-align: center;
     overflow: hidden;

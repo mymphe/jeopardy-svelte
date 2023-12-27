@@ -3,6 +3,7 @@
   import { quintOut } from "svelte/easing";
 
   export let title: string = "";
+  export let padding: boolean = true;
 </script>
 
 <div>
@@ -16,7 +17,7 @@
     {#if title}
       <p>{title}</p>
     {/if}
-    <div id="content">
+    <div id="content" class:padding>
       <slot />
     </div>
   </section>
@@ -29,6 +30,10 @@
   }
 
   #content {
+    overflow: hidden;
+  }
+
+  .padding {
     padding: 8px 24px 16px;
   }
 
@@ -38,6 +43,7 @@
     top: 40%;
     transform: translate(-50%, -50%);
 
+    max-width: 70vw;
     display: inline-block;
     text-align: center;
     overflow: hidden;
