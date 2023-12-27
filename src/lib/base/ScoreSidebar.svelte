@@ -17,17 +17,18 @@
   );
 </script>
 
-<div class="score {orientation ? 'right' : 'left'}">
+<div class="sidebar {orientation ? 'right' : 'left'}">
   {#each $displayed as { name, score }}
-    <div class="item">
-      <span class="name">
+    <div class="sidebar-team">
+      <p class="team-name">
         {name}
-      </span>
-      <span>&nbsp;</span>
+      </p>
       {#if $stage === Stage.TEAMS}
-        <button type="button" on:click={() => teams.remove(name)}>✕</button>
+        <button type="button" class="remove" on:click={() => teams.remove(name)}
+          >✕</button
+        >
       {:else}
-        <span class="numbers">
+        <span class="score">
           {score}
         </span>
       {/if}
@@ -60,7 +61,7 @@
 </div>
 
 <style>
-  .score {
+  .sidebar {
     position: absolute;
     top: 1rem;
     bottom: 1rem;
@@ -79,17 +80,34 @@
     align-items: end;
   }
 
-  .name {
+  .score {
     font-size: 1rem;
   }
 
-  .numbers {
-    font-size: 1rem;
-  }
-
-  .item {
+  .sidebar-team {
     display: flex;
+    justify-content: start;
+    flex-direction: row;
     align-items: center;
+    border: 2px solid black;
+    background-color: white;
+  }
+
+  .right .sidebar-team {
+    flex-direction: row-reverse;
+  }
+
+  .team-name {
+    padding: 0.2rem 0.4rem;
+    font-size: 1.5rem;
+  }
+
+  .left .team-name {
+    border-right: 2px solid black;
+  }
+
+  .right .team-name {
+    border-left: 2px solid black;
   }
 
   .updown {
@@ -101,7 +119,7 @@
 
   button {
     appearance: none;
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: red !important;
     border-radius: 50%;
     color: black;
@@ -113,8 +131,12 @@
     opacity: 0.3;
   }
 
-  button:active:enabled {
-    transform: translate(2px, 2px);
+  .remove:hover {
+    transform: scale(1.2);
+  }
+
+  .remove:active {
+    transform: scale(0.8);
   }
 
   .answer-correct {

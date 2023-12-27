@@ -10,6 +10,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  overflow-y: hidden;
+}
+
 * {
   margin: 0;
   box-sizing: border-box;

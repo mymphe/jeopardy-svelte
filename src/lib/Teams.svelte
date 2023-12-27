@@ -161,11 +161,14 @@
   }
 
   let newTeamName = random();
-
   let addDisabled = true;
+  const MAX_TEAMS = 20;
 
   $: {
-    addDisabled = !newTeamName || !!$teams.find((t) => t.name === newTeamName);
+    addDisabled =
+      !newTeamName ||
+      !!$teams.find((t) => t.name === newTeamName) ||
+      $teams.length === MAX_TEAMS;
   }
 
   $: {
@@ -178,6 +181,7 @@
   }
 </script>
 
+<img class="kto" src="kto.png" alt="вы кто такие" width="200px" />
 <Glass title="Кто вы такие?">
   <div>
     <button
@@ -198,6 +202,15 @@
 </Glass>
 
 <style>
+  .kto {
+    position: absolute;
+    top: 8vh;
+    left: 30vw;
+    z-index: 1;
+    -webkit-filter: drop-shadow(10px 10px 0 blue) drop-shadow(-4px -4px 0 blue);
+    filter: drop-shadow(8px 8px 0 blue) drop-shadow(-4px -4px 0 blue);
+  }
+
   div {
     display: flex;
     justify-content: space-between;
