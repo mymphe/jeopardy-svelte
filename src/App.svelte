@@ -5,9 +5,7 @@
   import Score from "./lib/Score.svelte";
   import Teams from "./lib/Teams.svelte";
   import Winner from "./lib/Winner.svelte";
-  import { nav } from "./store/nav";
   import { Stage, stage } from "./store/stage";
-  import { teams } from "./store/teams";
 </script>
 
 <main>

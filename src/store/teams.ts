@@ -1,12 +1,12 @@
 import type { Writable } from "svelte/store";
 import { persistable } from "./persistable";
 
-interface Team {
+export interface Team {
   name: string;
   score: number;
 }
 
-type Teams = Team[];
+export type Teams = Team[];
 
 const teamStore = persistable<Teams>("teams", []);
 
