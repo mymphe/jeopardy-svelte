@@ -30,7 +30,10 @@
   });
 </script>
 
-<Glass title={String(clue.price)} padding={clueType !== ClueType.image}>
+<Glass
+  title={String(clue.price)}
+  unpadded={clueType === ClueType.image || clueType === ClueType.video}
+>
   {#if clueType === ClueType.image}
     <img src={clue.clue.slice(6)} alt="clue" />
   {:else if clueType === ClueType.audio}

@@ -1,6 +1,6 @@
 <script lang="ts">
   export let title: string = "";
-  export let padding: boolean = true;
+  export let unpadded: boolean = false;
 </script>
 
 <div>
@@ -8,7 +8,7 @@
     {#if title}
       <p>{title}</p>
     {/if}
-    <div id="content" class:padding>
+    <div id="content" class:unpadded>
       <slot />
     </div>
   </section>
@@ -22,11 +22,11 @@
 
   #content {
     overflow: hidden;
-    padding: 0 0 16px;
+    padding: 8px 24px 16px;
   }
 
-  .padding {
-    padding: 8px 24px 16px;
+  .unpadded {
+    padding: 0 0 16px !important;
   }
 
   section {
