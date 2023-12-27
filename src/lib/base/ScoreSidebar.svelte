@@ -20,6 +20,18 @@
 <div class="sidebar {orientation ? 'right' : 'left'}">
   {#each $displayed as { name, score }}
     <div class="sidebar-team">
+      {#if $active && !$active.correct && !$active?.wrong.includes(name)}
+        <button
+          class="answer-correct"
+          disabled={$active.wrong.includes(name) || !!$active.correct}
+          type="button"
+          on:click={() => {
+            if ($active) {
+              game.answer(name, true, $active.path);
+            }
+          }}>🥳</button
+        >
+      {/if}
       <p class="team-name">
         {name}
       </p>
@@ -28,33 +40,21 @@
           >✕</button
         >
       {:else}
-        <span class="score">
+        <div class="score {score < 0 ? 'red' : 'green'}">
           {score}
-        </span>
+        </div>
       {/if}
       {#if $active && !$active.correct && !$active?.wrong.includes(name)}
-        <div class="updown">
-          <button
-            class="answer-correct"
-            disabled={$active.wrong.includes(name) || !!$active.correct}
-            type="button"
-            on:click={() => {
-              if ($active) {
-                game.answer(name, true, $active.path);
-              }
-            }}>✓</button
-          >
-          <button
-            class="answer-wrong"
-            disabled={!!$active.correct || $active.wrong.includes(name)}
-            type="button"
-            on:click={() => {
-              if ($active) {
-                game.answer(name, false, $active.path);
-              }
-            }}>✕</button
-          >
-        </div>
+        <button
+          class="answer-wrong"
+          disabled={$active.wrong.includes(name) || !!$active.correct}
+          type="button"
+          on:click={() => {
+            if ($active) {
+              game.answer(name, false, $active.path);
+            }
+          }}>🤦‍♀️</button
+        >
       {/if}
     </div>
   {/each}
@@ -82,6 +82,18 @@
 
   .score {
     font-size: 1rem;
+    width: 5ch;
+    text-align: right;
+    padding: 0.2rem;
+    font-weight: 600;
+  }
+
+  .score.red {
+    color: red;
+  }
+
+  .score.green {
+    color: rgb(0, 180, 0);
   }
 
   .sidebar-team {
@@ -91,6 +103,7 @@
     align-items: center;
     border: 2px solid black;
     background-color: white;
+    position: relative;
   }
 
   .right .sidebar-team {
@@ -110,36 +123,41 @@
     border-left: 2px solid black;
   }
 
-  .updown {
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-  }
-
   button {
-    appearance: none;
-    font-size: 1.5rem;
-    color: red !important;
-    border-radius: 50%;
-    color: black;
-    padding: 0.2rem 0.5rem;
-    font-family: "Tektur", sans-serif;
+    font-size: 1.3rem;
   }
 
-  button:disabled {
-    opacity: 0.3;
-  }
-
-  .remove:hover {
+  button:hover {
     transform: scale(1.2);
   }
 
-  .remove:active {
-    transform: scale(0.8);
+  button:active {
+    transform: scale(0.9);
   }
 
   .answer-correct {
-    color: rgb(0, 180, 0) !important;
+    position: absolute;
+    top: -30px;
+  }
+
+  .left .answer-correct {
+    left: 65%;
+  }
+
+  .right .answer-correct {
+    right: 65%;
+  }
+
+  .answer-wrong {
+    position: absolute;
+    bottom: -30px;
+  }
+
+  .left .answer-wrong {
+    left: 65%;
+  }
+
+  .right .answer-wrong {
+    right: 65%;
   }
 </style>

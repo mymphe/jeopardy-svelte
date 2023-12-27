@@ -35,7 +35,7 @@
     top: 45%;
     transform: translate(-50%, -50%);
 
-    max-width: 70vw;
+    max-width: 65vw;
     display: inline-block;
     text-align: center;
     overflow: hidden;

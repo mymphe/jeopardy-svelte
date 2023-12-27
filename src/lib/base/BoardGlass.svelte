@@ -53,7 +53,7 @@
     top: 45%;
     transform: translate(-50%, -50%);
 
-    width: 70vw;
+    width: 65vw;
     max-height: 70vh;
     text-align: center;
     overflow-x: hidden;
