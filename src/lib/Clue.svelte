@@ -91,7 +91,7 @@
   }
 
   img {
-    max-width: 700px;
-    max-height: 400px;
+    max-height: 60vh;
+    max-width: 70vw;
   }
 </style>

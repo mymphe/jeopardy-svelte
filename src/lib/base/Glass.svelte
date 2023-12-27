@@ -1,19 +1,10 @@
 <script lang="ts">
-  import { scale } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
-
   export let title: string = "";
   export let padding: boolean = true;
 </script>
 
 <div>
-  <section
-    transition:scale={{
-      duration: 400,
-      opacity: 0.5,
-      easing: quintOut,
-    }}
-  >
+  <section>
     {#if title}
       <p>{title}</p>
     {/if}
@@ -31,6 +22,7 @@
 
   #content {
     overflow: hidden;
+    padding: 0 0 16px;
   }
 
   .padding {
@@ -40,7 +32,7 @@
   section {
     position: absolute;
     left: 50%;
-    top: 40%;
+    top: 45%;
     transform: translate(-50%, -50%);
 
     max-width: 70vw;

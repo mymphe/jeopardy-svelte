@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { scale } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
   import { round } from "../../store/board";
   import { game } from "../../store/game";
   import { nav } from "../../store/nav";
@@ -18,13 +16,7 @@
 </script>
 
 <div class="board-glass">
-  <section
-    transition:scale={{
-      duration: 400,
-      opacity: 0.5,
-      easing: quintOut,
-    }}
-  >
+  <section>
     <div class="heading">
       <button
         disabled={$round === 0}
