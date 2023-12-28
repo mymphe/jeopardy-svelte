@@ -51,7 +51,7 @@
   }
 </script>
 
-<Glass title="загрузите файл">
+<Glass title="Загрузите файл">
   <button>
     <label for="json">💾</label>
   </button>

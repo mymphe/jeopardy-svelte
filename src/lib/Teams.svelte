@@ -184,7 +184,7 @@
 </script>
 
 <img class="kto" src="kto.png" alt="вы кто такие" width="200px" />
-<Glass title="Кто вы такие?">
+<Glass title="Вы кто такие?">
   <div>
     <button
       class="refresh"
