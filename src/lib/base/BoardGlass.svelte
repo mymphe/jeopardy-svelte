@@ -22,7 +22,7 @@
       type="button"
       on:click={() => round.update((r) => --r)}>←</button
     >
-    <span>Раунд {$round + 1} / {rounds}</span>
+    <span class="round-number">Раунд {$round + 1} / {rounds}</span>
     <button
       disabled={$round + 1 >= rounds}
       type="button"
@@ -61,6 +61,10 @@
     background-color: white;
     border: 2px solid blue;
     box-shadow: 10px 10px blue;
+  }
+
+  .round-number {
+    font-weight: 600;
   }
 
   button {

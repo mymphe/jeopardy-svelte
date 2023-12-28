@@ -6,7 +6,7 @@
 <div>
   <section>
     {#if title}
-      <p>{title}</p>
+      <p class="title">{title}</p>
     {/if}
     <div id="content" class:unpadded>
       <slot />
@@ -27,6 +27,10 @@
 
   .unpadded {
     padding: 0 0 16px !important;
+  }
+
+  .title {
+    font-weight: 600;
   }
 
   section {
